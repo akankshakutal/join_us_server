@@ -11,10 +11,10 @@ const connection = mysql.createConnection({
 });
 
 const urlParser = function(url) {
-  return url.split("/")[3];
+  return url.split("/")[2];
 };
 
-app.get(/api\/join_us\/*/, function(req, res) {
+const insertData = function(req, res) {
   const person = {
     email: urlParser(req.url)
   };
@@ -27,9 +27,20 @@ app.get(/api\/join_us\/*/, function(req, res) {
       res.send("" + count);
     });
   });
-});
+};
 
-app.use(express.static(__dirname + "/public"));
+const getData = function(req, res) {
+  const q = "SELECT COUNT(*) AS count FROM users";
+  connection.query(q, function(err, results) {
+    if (err) throw err;
+    let count = results[0].count;
+    res.send("" + count);
+  });
+};
+
+app.get(/\/join_us\/*/, insertData);
+app.get("/hello", getData);
+app.use(express.static(__dirname + "/join_us_client/build"));
 
 app.listen(port, () =>
   console.log("Express server is running on localhost:8000")

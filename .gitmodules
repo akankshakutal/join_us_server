@@ -1,0 +1,3 @@
+[submodule "join_us_client"]
+	path = join_us_client
+	url = https://github.com/akankshakutal/join_us_client
