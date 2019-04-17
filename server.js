@@ -4,10 +4,10 @@ const port = process.env.PORT || 8000;
 const app = express();
 
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "ARK@2606",
-  database: "join_us"
+  host: "us-cdbr-iron-east-02.cleardb.net",
+  user: "bb36a78e6ea35f",
+  password: "6caec951",
+  database: "heroku_56428ff282bd94d"
 });
 
 const urlParser = function(url) {
